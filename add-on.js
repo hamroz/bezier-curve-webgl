@@ -20,75 +20,44 @@ function fshader() {
   return FSHADER_SOURCE;
 }
 
-var G_Points = [
-  [-0.5, -0.4],
-  [-0.85, -0.15],
-  [-0.82, 0.42],
-  [-0.7, 0.42],
-  [-0.58, 0.42],
-  [-0.45, 0.15],
-  [-0.35, 0.05],
-  [-0.27, 0.02],
-  [-0.1, -0.2],
-  [0, -0.2],
-  [0.12, -0.2],
-  [0.3, -0.21],
-  [0.35, 0.05],
-  [0.41, 0.33],
-  [0.6, 0.31],
-  [0.72, 0.3],
-  [0.83, 0.27],
-  [0.87, -0.2],
-  [0.55, -0.5],
+var Q_Points = [
+  [0.57, -0.48],
+  [0.89, -0.18],
+  [0.85, 0.29],
+  [0.74, 0.32],
+  [0.62, 0.33],
+  [0.43, 0.35],
+  [0.37, 0.07],
+  [0.32, -0.19],
+  [0.14, -0.18],
+  [0.2, -0.18],
+  [-0.08, -0.18],
+  [-0.25, 0.04],
+  [-0.33, 0.07],
+  [-0.43, 0.17],
+  [-0.56, 0.44],
+  [-0.68, 0.44],
+  [-0.8, 0.44],
+  [-0.83, -0.13],
+  [-0.48, -0.38],
 ];
 
-// var G_Points = [
-//   [-0.52, -0.42],
-//   [-0.87, -0.17],
-//   [-0.84, 0.4],
-//   [-0.72, 0.4],
-//   [-0.6, 0.4],
-//   [-0.47, 0.13],
-//   [-0.37, 0.02],
-//   [-0.29, 0],
-//   [-0.12, -0.22],
-//   [-0.8, -0.4],
-//   [0.1, -0.4],
-//   [0.1, -0.23],
-//   [0.33, 0.02],
-//   [0.39, 0.31],
-//   [0.4, 0.29],
-//   [0.7, 0.1],
-//   [0.81, 0.25],
-//   [0.85, -0.4],
-//   [0.53, -0.7],
-// ];
-
 function D_Dots(gl, a_Position) {
-  var ArrNew = [];
-
   var xs = [];
   var ys = [];
   var xys = [];
   var s = 0.01;
   zs = 0;
 
-  G_Points.forEach((PNT) => {
-    ArrNew.push(PNT[0]);
-    ArrNew.push(PNT[1]);
-  });
-
-  G_Pnt = ArrNew;
-
   gl.clear(gl.COLOR_BUFFER_BIT);
 
-  Point_Curr = G_Points[0];
+  Point_Curr = Q_Points[0];
   Ind_Curr = 0;
-  for (i = 0; i <= G_Points.length / 4 + 1; i++) {
+  for (i = 0; i <= Q_Points.length / 4 + 1; i++) {
     Ind_Curr = i * 3;
     while (zs <= 1) {
-      x = xCoords(G_Points, Point_Curr, zs, Ind_Curr);
-      y = yCoords(G_Points, Point_Curr, zs, Ind_Curr);
+      x = xCoords(Q_Points, Point_Curr, zs, Ind_Curr);
+      y = yCoords(Q_Points, Point_Curr, zs, Ind_Curr);
       console.log(y);
       xs.push(x);
       ys.push(y);
@@ -97,13 +66,13 @@ function D_Dots(gl, a_Position) {
       zs += s;
     }
     zs = 0;
-    Point_Curr = G_Points[Ind_Curr + 3];
+    Point_Curr = Q_Points[Ind_Curr + 3];
   }
 
   G_Lines = [];
-  for (var i = 0; i < G_Points.length; i += 1) {
-    G_Lines.push(G_Points[i][0]);
-    G_Lines.push(G_Points[i][1]);
+  for (var i = 0; i < Q_Points.length; i += 1) {
+    G_Lines.push(Q_Points[i][0]);
+    G_Lines.push(Q_Points[i][1]);
   }
 
   var vertices = new Float32Array(xys);
